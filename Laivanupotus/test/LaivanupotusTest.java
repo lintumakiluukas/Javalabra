@@ -33,7 +33,7 @@ public class LaivanupotusTest {
     
     @Before
     public void setUp() {
-        kentta= new Kentta();
+        kentta= new Kentta("Hubert Cumberdale");
         laiva=new Laiva(2, 0,0);
         kentta.lisaaLaiva(laiva);
     }

@@ -1,27 +1,64 @@
 package laivanupotus;
 
+import java.util.Scanner;
+
 public class Laivanupotus {
 
     public static void main(String[] args) {
-        Kentta omaKentta = new Kentta();
 
-        Laiva laiva5 = new Laiva(2, 0,0);
+        Scanner lukija = new Scanner(System.in);
+        String komento = "";
+        int vuoro = 0;
+        int peliJatkuu = 1;
 
-        omaKentta.lisaaLaiva(laiva5);
-      
-        System.out.println(laiva5);
-        System.out.println(omaKentta.ammu(0,0));
-        System.out.println(omaKentta.ammu(1,0));
-        //   Kentta vastustajanKentta = new Kentta();
+        Kentta omaKentta = new Kentta("Punakone");
+        omaKentta.lisaaLaivat(omaKentta);
+        
 
-//        Laiva lentotukialus = new Laiva(5);
-//        Laiva taistelulaiva = new Laiva(4);
-//        Laiva risteilija1 = new Laiva(3);
-//        Laiva risteilija2 = new Laiva(3);
-//        Laiva havittaja = new Laiva(2);
-//        Laiva sukellusvene = new Laiva(1);
-//        
-//        omaKentta.lisaaLaiva(lentotukialus);
+        Kentta vastustajanKentta = new Kentta("Pelaaja-Petteri");
+        vastustajanKentta.lisaaLaivat(vastustajanKentta);
 
+        System.out.println("Peli alkaa!");
+        System.out.println("");
+        while (peliJatkuu == 1) {
+            while (vuoro == 0) {
+                System.out.println("Sinun vuorosi!");          
+                System.out.println("Komento: ");
+                komento = lukija.nextLine();
+                try {
+                    if (komento.equals("ammu")) {
+                        System.out.print("X:");
+                        int x = Integer.parseInt(lukija.nextLine());
+                        System.out.print("Y:");
+                        int y = Integer.parseInt(lukija.nextLine());
+                        if (x < 0 || x > 10 || y < 0 || y > 10) {
+                            throw new IllegalArgumentException("");
+                        }
+                        System.out.println(vastustajanKentta.ammu(x, y));
+                        vuoro = 1;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Virheellinen koordinaatti!");
+                }
+                if(komento.equals("quit")){
+                    peliJatkuu=0;
+                    break;
+                }
+
+            }
+            while (vuoro == 1) {
+                System.out.println("     Vastustajan vuoro!");          
+                int x = (int) Math.floor((Math.random() * 10) + 1);
+                int y = (int) Math.floor((Math.random() * 10) + 1);
+                System.out.println("     "+omaKentta.ammu(x, y));
+                vuoro = 0;
+            }
+
+
+
+        }
+        
     }
+
 }
+   

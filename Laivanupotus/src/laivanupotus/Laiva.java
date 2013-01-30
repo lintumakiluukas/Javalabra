@@ -6,7 +6,6 @@ package laivanupotus;
 
 import java.util.HashMap;
 import java.util.List;
-import laivanupotus.Suunta;
 
 /**
  *
@@ -18,28 +17,42 @@ public class Laiva {
     private int x;
     private int y;
     private int hitpoints;
+    private Kentta kentta;
     private HashMap<Integer, Integer> pisteet;
 
-    public Laiva(int koko) {
+    public Laiva(int koko, Kentta kentta) {
         this.koko = koko;
         this.hitpoints = koko;
+        this.kentta = kentta;
         maaritaSijainti();
     }
 
-    public Laiva(int koko, int x, int y) {
-        this.koko = koko;
-        this.hitpoints = koko;
-        this.x=x;
-        this.y=y;
-        this.pisteet = varatutPisteet();
-    }
-
+//    public Laiva(int koko, int x, int y) {
+//        this.koko = koko;
+//        this.hitpoints = koko;
+//        this.x=x;
+//        this.y=y;
+//        this.pisteet = varatutPisteet();
+//    }
     public void maaritaSijainti() {
         this.x = (int) Math.floor((Math.random() * 10) + 1) - this.koko;
         if (this.x < 0) {
             maaritaSijainti();
         }
         this.y = (int) Math.floor((Math.random() * 10) + 1);
+   
+            //for (int i = 0; i < 5; i++) {
+        for(int i=0; i<this.kentta.getLaivat().size(); i++){
+                Laiva laiva = (Laiva) this.kentta.getLaivat().get(i);
+                for (int a : laiva.pisteet.keySet()) {
+                    if (a == x && laiva.pisteet.get(a) == y) {
+                        maaritaSijainti();
+                        System.out.println("Jouduttiin määrittämään sijainti uudelleen");
+                    }
+                }
+
+            }
+        
         this.pisteet = varatutPisteet();
     }
 
@@ -50,9 +63,9 @@ public class Laiva {
                 if (a == x && this.pisteet.get(a) == y) {
                     pisteet.remove(a);
                     if (pisteet.size() > 0) {
-                        raportti += " Vahingoitettiin vihollisalusta!";
+                        raportti += " Vahingoitettiin alusta!";
                     } else {
-                        raportti += " Tuhottiin vihollisalus!";
+                        raportti += " Tuhottiin alus!";
                     }
                     return raportti;
 
