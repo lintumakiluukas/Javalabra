@@ -6,6 +6,7 @@ package laivanupotus;
 
 import java.util.HashMap;
 import java.util.List;
+import java.awt.Graphics;
 
 /**
  *
@@ -14,8 +15,8 @@ import java.util.List;
 public class Laiva {
 
     private int koko;
-    private int x;
-    private int y;
+    private int x=0;
+    private int y=0;
     private int hitpoints;
     private Kentta kentta;
     private HashMap<Integer, Integer> pisteet;
@@ -34,20 +35,32 @@ public class Laiva {
 //        this.y=y;
 //        this.pisteet = varatutPisteet();
 //    }
+    
+ 
+/**
+ * Metodi kertoo mikä on onnistumistodennäköisyys syöteluvulla
+ * ottaen huomioon olion konstruktorissa asetetun kalibrointiarvon
+ *
+ * @param   syote   Käyttäjän antama syöte
+ * 
+ * @return todennäköisyys kalibroituna
+ */
     public void maaritaSijainti() {
         this.x = (int) Math.floor((Math.random() * 10) + 1) - this.koko;
         if (this.x < 0) {
             maaritaSijainti();
         }
         this.y = (int) Math.floor((Math.random() * 10) + 1);
-   
-            //for (int i = 0; i < 5; i++) {
-        for(int i=0; i<this.kentta.getLaivat().size(); i++){
+ 
+        for(int i=0; i<this.kentta.getLaivat().size(); i++){ //         Tarkistetaan päällekkäisyydet
                 Laiva laiva = (Laiva) this.kentta.getLaivat().get(i);
                 for (int a : laiva.pisteet.keySet()) {
                     if (a == x && laiva.pisteet.get(a) == y) {
-                        maaritaSijainti();
-                        System.out.println("Jouduttiin määrittämään sijainti uudelleen");
+                       maaritaSijainti();
+                        //this.y+=1;
+                        System.out.println("No nyt siirretää");
+                    }else{
+                        //System.out.println("Ei tarvinnu siirtää :D");
                     }
                 }
 
@@ -95,6 +108,10 @@ public class Laiva {
 
         }
         return lista;
+    }
+    public void piirra(Graphics graphics){
+      
+        graphics.fillRect(this.x, this.y, 30, 30);
     }
 
     public String toString() {
