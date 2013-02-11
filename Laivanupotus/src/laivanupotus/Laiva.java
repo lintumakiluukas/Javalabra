@@ -27,6 +27,12 @@ public class Laiva {
         this.kentta = kentta;
         maaritaSijainti();
     }
+    public Laiva(int koko, Kentta kentta, int x, int y) {
+        this.koko = koko;
+        this.hitpoints = koko;
+        this.kentta = kentta;
+       this.pisteet=varatutPisteet();
+    }
 
 //    public Laiva(int koko, int x, int y) {
 //        this.koko = koko;
@@ -56,11 +62,10 @@ public class Laiva {
                 Laiva laiva = (Laiva) this.kentta.getLaivat().get(i);
                 for (int a : laiva.pisteet.keySet()) {
                     if (a == x && laiva.pisteet.get(a) == y) {
+                        System.out.println(laiva);
                        maaritaSijainti();
-                        //this.y+=1;
                         System.out.println("No nyt siirretää");
                     }else{
-                        //System.out.println("Ei tarvinnu siirtää :D");
                     }
                 }
 
@@ -68,6 +73,7 @@ public class Laiva {
         
         this.pisteet = varatutPisteet();
     }
+ 
 
     public String tarkistaOsumaJaTuhoa(int x, int y) {
         String raportti = "";
@@ -98,6 +104,10 @@ public class Laiva {
 
     public int getPituus() {
         return this.pisteet.size();
+    }   
+    public HashMap pisteet() {
+
+        return this.pisteet;
     }
 
     public HashMap varatutPisteet() {
@@ -109,12 +119,8 @@ public class Laiva {
         }
         return lista;
     }
-    public void piirra(Graphics graphics){
-      
-        graphics.fillRect(this.x, this.y, 30, 30);
-    }
 
     public String toString() {
-        return "Koko: " + this.pisteet.size() + ". " + this.pisteet;
+        return "Koko: " + this.pisteet.size() + ". " + this.pisteet+", "+this.kentta.getNimi();
     }
 }

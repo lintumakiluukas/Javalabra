@@ -19,6 +19,7 @@ public class LaivanupotusTest {
     
     Kentta kentta;
     Laiva laiva;
+   
     
     public LaivanupotusTest() {
     }
@@ -34,7 +35,8 @@ public class LaivanupotusTest {
     @Before
     public void setUp() {
         kentta= new Kentta("Hubert Cumberdale");
-        laiva=new Laiva(2, 0,0);
+        laiva=new Laiva(2, kentta, 0,0);
+        
         kentta.lisaaLaiva(laiva);
     }
 
@@ -55,15 +57,15 @@ public class LaivanupotusTest {
     }
     @Test
     public void ampuminenTyhjaanOnnistuu(){
-       assertEquals("Ammuttiin koordinaatteihin (2,0) onnistuneesti.",kentta.ammu(2, 0));
+       assertEquals("Hubert Cumberdale ampui koordinaatteihin (2,0) onnistuneesti.",kentta.ammu(2, 0));
     }
     @Test
     public void laivanVahingoittaminen(){
-        assertEquals("Ammuttiin koordinaatteihin (0,0) onnistuneesti. Vahingoitettiin vihollisalusta!",kentta.ammu(0,0));
+        assertEquals("Hubert Cumberdale ampui koordinaatteihin (0,0) onnistuneesti. Vahingoitettiin alusta!",kentta.ammu(0,0));
     }
     @Test
     public void laivaTulostaaItsensaOikein(){
-    assertEquals("Koko: 2. {0=0, 1=0}", laiva.toString());
+    assertEquals("Koko: 2. {0=0, 1=0}, Hubert Cumberdale", laiva.toString());
     }
 
 }

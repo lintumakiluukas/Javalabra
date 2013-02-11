@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class Kentta {
     private ArrayList<Laiva> laivat = new ArrayList<Laiva>();
+    private ArrayList<ArrayList> ammututKoordinaatit = new ArrayList<ArrayList>();
     private String nimi="";
     public Kentta(String nimi){
         this.nimi=nimi;
@@ -32,6 +33,9 @@ public class Kentta {
 
     public ArrayList getLaivat(){
         return this.laivat;
+    }
+    public String getNimi(){
+        return this.nimi;
     }
 }
 
