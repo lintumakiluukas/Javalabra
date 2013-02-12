@@ -30,6 +30,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava{
 
         graphics.fillRect(200, 100, 1, 100);//väliviiva
         graphics.drawRect(100, 100, 200, 100);//reunat
+        
+        graphics.drawRect(0, 225, 400, 75);//alapalkki
 
         graphics.drawString("A", 100, 95);
         graphics.drawString("B", 110, 95);
@@ -84,13 +86,24 @@ public class Piirtoalusta extends JPanel implements Paivitettava{
 
 
         }
+        
+        graphics.setColor(Color.red);
+        for(int i=0; i<laivanupotus.getAmmututX().size(); i++){
+            graphics.drawOval((int)laivanupotus.getAmmututX().get(i)* 10 + 100, (int)laivanupotus.getAmmututY().get(i) * 10 + 90, 9, 9);
+            graphics.drawOval((int)laivanupotus.getAmmututX().get(i)* 10 + 100+1, (int)laivanupotus.getAmmututY().get(i) * 10 + 90+1, 7, 7);
+        }        
+        
+        graphics.setColor(Color.black);
+        for(int i=0; i<laivanupotus.getOhiAmmututX().size(); i++){
+            graphics.drawLine((int)laivanupotus.getOhiAmmututX().get(i)* 10 + 100,(int)laivanupotus.getOhiAmmututY().get(i) * 10 + 90, (int)laivanupotus.getOhiAmmututX().get(i)* 10 + 109,(int)laivanupotus.getOhiAmmututY().get(i) * 10 + 99);       
+            graphics.drawLine((int)laivanupotus.getOhiAmmututX().get(i)* 10 + 109,(int)laivanupotus.getOhiAmmututY().get(i) * 10 + 90,(int)laivanupotus.getOhiAmmututX().get(i)* 10 + 100,(int)laivanupotus.getOhiAmmututY().get(i) * 10 + 99);
+        }
   paivita();
      
         } 
     @Override
     public void paivita() {
         repaint();
-      //  System.out.println("jee");
     }
     }
 

@@ -8,17 +8,21 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
     private Piirtoalusta piirtoalusta;
     private Laivanupotus laivanupotus;
+    private ArrayList<Integer> ammututX = new ArrayList<Integer>();
+    private ArrayList<Integer> ammututY = new ArrayList<Integer>();
 
     public Kayttoliittyma() {
     }
@@ -37,13 +41,18 @@ public class Kayttoliittyma implements Runnable {
     }
 
         private JPanel luoValikko() {
-        JPanel panel = new JPanel(new GridLayout(1, 3));
-        
+        JPanel panel = new JPanel(new GridLayout(1, 5));
+        JTextField x = new JTextField("X");
+        JTextField y = new JTextField("Y");
         JButton nappi = new JButton("Ammu");
-        nappi.addActionListener(new NappiKuuntelija(this.laivanupotus, this.piirtoalusta));
+        JButton lopetusnappi = new JButton("Lopeta peli");
+        nappi.addActionListener(new NappiKuuntelija(this.laivanupotus, x, y,1));
+        lopetusnappi.addActionListener(new NappiKuuntelija(this.laivanupotus, x, y,2));
+        panel.add(x);
+        panel.add(y);
         panel.add(nappi);
+        panel.add(lopetusnappi);
         
-        panel.add(new JButton("Lopeta peli"));
         return panel;
     }
         
@@ -54,7 +63,7 @@ public class Kayttoliittyma implements Runnable {
         Kentta vastustajanKentta = this.laivanupotus.getVastustajanKentta();
         this.piirtoalusta = new Piirtoalusta(omaKentta.getLaivat(), vastustajanKentta.getLaivat(), omaKentta, vastustajanKentta, this.laivanupotus);
         container.add(this.piirtoalusta);
-               container.add(luoValikko(), BorderLayout.SOUTH);
+        container.add(luoValikko(), BorderLayout.SOUTH);
         
     }
 

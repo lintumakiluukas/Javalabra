@@ -4,6 +4,7 @@
  */
 package laivanupotus;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,12 +15,13 @@ public class Laivanupotus {
 
     private Kentta omaKentta = new Kentta("Punakone");
     Kentta vastustajanKentta = new Kentta("Pelaaja-Petteri");
-
+    private ArrayList<Integer> ammututX = new ArrayList<Integer>();
+    private ArrayList<Integer> ammututY = new ArrayList<Integer>();
+    private ArrayList<Integer> ohiAmmututX = new ArrayList<Integer>();
+    private ArrayList<Integer> ohiAmmututY = new ArrayList<Integer>();
     public Laivanupotus() {
         omaKentta.lisaaLaivat(omaKentta);
         vastustajanKentta.lisaaLaivat(vastustajanKentta);
-        System.out.println("Peli alkaa!");
-        System.out.println(vastustajanKentta.getLaivat());
 
     }
 
@@ -30,43 +32,96 @@ public class Laivanupotus {
         return this.vastustajanKentta;
     }
 
-    public void toteutaVuorot() {
-        System.out.println(this.vastustajanKentta.getLaivat());
-        Scanner lukija = new Scanner(System.in);
-        String komento = "";
-
+    public void toteutaVuorot(String px, String py) {
         int vuoro = 0;
         while (vuoro == 0) {
-            System.out.println("Sinun vuorosi!");
-            System.out.println("Komento: ");
-            komento = lukija.nextLine();
-            try {
-                if (komento.equals("ammu")) {
-                    System.out.print("X:");
-                    int x = Integer.parseInt(lukija.nextLine());
-                    System.out.print("Y:");
-                    int y = Integer.parseInt(lukija.nextLine());
-                    if (x < 0 || x > 10 || y < 0 || y > 10) {
-                        throw new IllegalArgumentException("");
-                    }
-                    System.out.println(vastustajanKentta.ammu(x, y));
-                    vuoro = 1;
-                }
-            } catch (Exception e) {
-                System.out.println("Virheellinen koordinaatti!");
+            px=px.toUpperCase();
+            int x;
+            if(px.equals("A")){
+                x=0;
+            }else if(px.equals("B")){
+                x=1;
+            }else if(px.equals("C")){
+                x=2;
+            }else if(px.equals("D")){
+                x=3;
+            }else if(px.equals("E")){
+                x=4;
+            }else if(px.equals("F")){
+                x=5;
+            }else if(px.equals("G")){
+                x=6;
+            }else if(px.equals("H")){
+                x=7;
+            }else if(px.equals("I")){
+                x=8;
+            }else if(px.equals("J")){
+                x=9;
+            }else{
+                System.out.println("Virheellinen X-koordinaatti!");
+                break;
             }
+
+            int y;
+            if(py.equals("1")){
+                y=1;
+            }else if(py.equals("2")){
+                y=2;
+            }else if(py.equals("3")){
+                y=3;
+            }else if(py.equals("4")){
+                y=4;
+            }else if(py.equals("5")){
+                y=5;
+            }else if(py.equals("6")){
+                y=6;
+            }else if(py.equals("7")){
+                y=7;
+            }else if(py.equals("8")){
+                y=8;
+            }else if(py.equals("9")){
+                y=9;
+            }else if(py.equals("10")){
+                y=10;
+            }else{
+                System.out.println("Virheellinen Y-koordinaatti!");
+                break;
+            }
+            String raportti=vastustajanKentta.ammu(x,y);
+            if(raportti.equals(this.vastustajanKentta.getNimi()+" ampui koordinaatteihin ("+x+","+y+") onnistuneesti. Vahingoitettiin alusta!") || raportti.equals(this.vastustajanKentta.getNimi()+" ampui koordinaatteihin ("+x+","+y+") onnistuneesti. Tuhottiin alus!")){
+                this.ammututX.add(x);
+                this.ammututY.add(y);
+            }else{
+                this.ohiAmmututX.add(x);
+                this.ohiAmmututY.add(y);
+            }
+
+            vuoro=1;
 
         }
         while (vuoro == 1) {
-            System.out.println("     Vastustajan vuoro!");
+           // System.out.println("     Vastustajan vuoro!");
             int x = (int) Math.floor((Math.random() * 10) + 1);
             int y = (int) Math.floor((Math.random() * 10) + 1);
-            System.out.println("     " + omaKentta.ammu(x, y));
+            //System.out.println("     " + omaKentta.ammu(x, y));
             vuoro = 0;
         }
 
 
 
+    }
+    
+    public ArrayList getAmmututX(){
+        return this.ammututX;
+    }   
+    public ArrayList getAmmututY(){
+        return this.ammututY;
+    }  
+    public ArrayList getOhiAmmututX(){
+        return this.ohiAmmututX;
+    }  
+    public ArrayList getOhiAmmututY(){
+        return this.ohiAmmututY;
     }
 }
 
