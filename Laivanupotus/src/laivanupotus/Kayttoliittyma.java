@@ -33,7 +33,7 @@ public class Kayttoliittyma implements Runnable {
         this.laivanupotus = new Laivanupotus();
        
         frame = new JFrame("Laivanupotus");
-        frame.setPreferredSize(new Dimension(400, 300));
+        frame.setPreferredSize(new Dimension(425, 370));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
         frame.pack();
@@ -42,8 +42,8 @@ public class Kayttoliittyma implements Runnable {
 
         private JPanel luoValikko() {
         JPanel panel = new JPanel(new GridLayout(1, 5));
-        JTextField x = new JTextField("X");
-        JTextField y = new JTextField("Y");
+        JTextField x = new JTextField("A");
+        JTextField y = new JTextField("1");
         JButton nappi = new JButton("Ammu");
         JButton lopetusnappi = new JButton("Lopeta peli");
         nappi.addActionListener(new NappiKuuntelija(this.laivanupotus, x, y,1));

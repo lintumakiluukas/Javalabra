@@ -23,8 +23,8 @@ public class NappiKuuntelija implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if(nappi==1){
         l.toteutaVuorot(this.x.getText(),this.y.getText());
-        this.x.setText("");
-        this.y.setText("");
+        //this.x.setText("");
+        //this.y.setText("");
         }else if(nappi==2){
             System.exit(0); 
         }
