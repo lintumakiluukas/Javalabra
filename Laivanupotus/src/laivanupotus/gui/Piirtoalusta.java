@@ -1,4 +1,4 @@
-package laivanupotus;
+package laivanupotus.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,8 +19,14 @@ import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import javax.imageio.ImageIO;
+import laivanupotus.domain.Kentta;
+import laivanupotus.domain.Kentta;
+import laivanupotus.domain.Laiva;
+import laivanupotus.domain.Laiva;
+import laivanupotus.peli.Laivanupotus;
+import laivanupotus.peli.Laivanupotus;
 
-public class Piirtoalusta extends JPanel implements Paivitettava {
+public class Piirtoalusta extends JPanel implements Paivitettava{
 
     private ArrayList laivat;
     private ArrayList vastustajanLaivat;
@@ -45,6 +51,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         this.vastustajanLaivat = vastustajanLaivat;
         this.omaKentta = a;
         this.vastustajanKentta = b;
+        
 
         this.image = null;
         try {
@@ -63,6 +70,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     @Override
     protected void paintComponent(Graphics graphics) {
+
+            
         super.paintComponent(graphics);
         graphics.drawImage(image, 0, 0, null);
         graphics.setColor(Color.black);
@@ -126,7 +135,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             Laiva laiva = (Laiva) this.vastustajanLaivat.get(i);
             HashMap pisteet = laiva.pisteet();
             for (Object a : pisteet.keySet()) {
-                graphics.fillRect((int) a * 10 + 100, (int) pisteet.get(a) * 10 + 90, 9, 9);
+              //  graphics.fillRect((int) a * 10 + 100, (int) pisteet.get(a) * 10 + 90, 9, 9);
             }
         }
 
@@ -168,14 +177,12 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             graphics.setColor(Color.black);
             graphics.drawString("HÄVISIT PELIN!", 160, 150);
         }
-        paivita();
+     // super.repaint();
+        
     }
-
-    /**
-     * Päivitetään piirtoalusta
-     */
     @Override
-    public void paivita() {
-        repaint();
-    }
+   public void paivita(){
+       super.repaint();
+   }
+    
 }

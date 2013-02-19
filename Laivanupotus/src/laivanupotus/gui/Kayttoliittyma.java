@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package laivanupotus;
+package laivanupotus.gui;
 
+import laivanupotus.gui.Piirtoalusta;
+import laivanupotus.gui.NappiKuuntelija;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -15,6 +17,8 @@ import javax.swing.WindowConstants;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import laivanupotus.domain.Kentta;
+import laivanupotus.peli.Laivanupotus;
 
 public class Kayttoliittyma implements Runnable {
 
@@ -30,7 +34,8 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         
-        this.laivanupotus = new Laivanupotus();
+        this.laivanupotus = new Laivanupotus(this.piirtoalusta);
+        this.laivanupotus.setPaivitettava(this.piirtoalusta);
        
         frame = new JFrame("Laivanupotus");
         frame.setPreferredSize(new Dimension(425, 370));
@@ -56,15 +61,12 @@ public class Kayttoliittyma implements Runnable {
         return panel;
     }
         
-    private void luoKomponentit(Container container) {
-    
-        
+    private void luoKomponentit(Container container) {   
         Kentta omaKentta = this.laivanupotus.getOmaKentta();
         Kentta vastustajanKentta = this.laivanupotus.getVastustajanKentta();
         this.piirtoalusta = new Piirtoalusta(omaKentta.getLaivat(), vastustajanKentta.getLaivat(), omaKentta, vastustajanKentta, this.laivanupotus);
         container.add(this.piirtoalusta);
         container.add(luoValikko(), BorderLayout.SOUTH);
-        
     }
 
     public JFrame getFrame() {

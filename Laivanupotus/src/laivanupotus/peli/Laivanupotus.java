@@ -2,11 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package laivanupotus;
+package laivanupotus.peli;
 
+import laivanupotus.gui.Piirtoalusta;
+import java.awt.Graphics;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import laivanupotus.domain.Kentta;
+import laivanupotus.domain.Laiva;
+import laivanupotus.gui.Paivitettava;
 
 public class Laivanupotus {
 
@@ -26,18 +31,26 @@ public class Laivanupotus {
     private ArrayList<Integer> vastustajanAmmututY = new ArrayList<Integer>();
     private ArrayList<Integer> vastustajanOhiAmmututX = new ArrayList<Integer>();
     private ArrayList<Integer> vastustajanOhiAmmututY = new ArrayList<Integer>();
-    String t2 = "";
-    String t3 = "";
-    String t4 = "";
-    String t5 = "";
-    String t6 = timestamp() + "Laivanupotus on alkanut!";
-    String t7 = timestamp() + "Syötä haluamasi koordinaatit ja paina ampumisnappia!";
+    public String t2 = "";
+    public String t3 = "";
+    public String t4 = "";
+    public String t5 = "";
+    public String t6 = timestamp() + "Laivanupotus on alkanut!";
+    public String t7 = timestamp() + "Syötä haluamasi koordinaatit ja paina ampumisnappia!";
+    private Piirtoalusta piirtoalusta;
+    private Paivitettava paivitettava;
 
-    public Laivanupotus() {
+    public Laivanupotus(Piirtoalusta piirtoalusta) {
+        this.piirtoalusta = piirtoalusta;
         omaKentta.lisaaLaivat(omaKentta);
         vastustajanKentta.lisaaLaivat(vastustajanKentta);
     }
 
+    /**
+     * Luo aikaleiman
+     *
+     * @return palauttaa merkkijonon, joka kertoo kellonajan
+     */
     public String timestamp() {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm");
@@ -48,11 +61,25 @@ public class Laivanupotus {
     public Kentta getOmaKentta() {
         return this.omaKentta;
     }
+    public void setPaivitettava(Paivitettava paivitettava){
+        this.paivitettava=paivitettava;
+    }
+    public Paivitettava getPaivitettava(){
+        return this.paivitettava;
+    }
 
     public Kentta getVastustajanKentta() {
         return this.vastustajanKentta;
     }
 
+    /**
+     * Peli pyörii yhden kierroksen eteenpäin, eli suorittaa ensin pelaajan
+     * vuoron ja sen jälkeen vastustajan vuoron. Kutsutaan ampumisnappia
+     * painamalla.
+     *
+     * @param px X-koordinaatti, johon pelaaja ampuu
+     * @param py Y-Koordinaatti, johon pelaaja ampuu
+     */
     public void toteutaVuorot(String px, String py) {
         int vuoro = 0;
         while (vuoro == 0) {
@@ -82,7 +109,6 @@ public class Laivanupotus {
                 ilmoitus(timestamp() + "X-koordinaatin on oltava väliltä A-I!");
                 break;
             }
-
             int y;
             if (py.equals("1")) {
                 y = 1;
@@ -125,10 +151,6 @@ public class Laivanupotus {
                 ilmoitus(timestamp() + "Ammuttiin koordinaatteihin (" + px + "," + py + "). Huti!");
                 vuoro = 1;
             }
-
-
-
-
         }
         while (vuoro == 1) {
 
@@ -159,15 +181,10 @@ public class Laivanupotus {
                         this.ammutaanLaivaa = 2;
                         this.vx = this.osuttuX;
                     }
-
-
-
-
                     this.vy = this.osuttuY;
                     System.out.println("juuh oikeelle");
                 }
                 if (this.ammutaanLaivaa == 2) {
-                    //this.vx=this.osuttuX-1;
                     this.vx--;
 
                     this.vy = this.osuttuY;
@@ -175,8 +192,6 @@ public class Laivanupotus {
                 }
 
             }
-
-
             String raportti = omaKentta.ammu(this.vx, this.vy);
             if (raportti.equals(this.omaKentta.getNimi() + " ampui koordinaatteihin (" + this.vx + "," + this.vy + ") onnistuneesti. Vahingoitettiin alusta!")) {
                 this.vastustajanAmmututX.add(this.vx);
@@ -203,15 +218,19 @@ public class Laivanupotus {
                     this.ammutaanLaivaa = 0;
                 }
                 vuoro = 0;
+                
             }
-
-            System.out.println(this.vx + "," + this.vy);
         }
-
-
 
     }
 
+    /**
+     * Tarkistaa jäljellä olevien laivojen määrän molemmilta kentiltä ja
+     * tarvittaessa lopettaa pelin
+     *
+     * @return palauttaa arvon, joka kertoo mikäli toiselta kentältä on kaikki
+     * laivat tuhottu
+     */
     public int tarkistaTilanne() {
         int laskuri = 0;
         for (int i = 0; i < this.vastustajanKentta.getLaivat().size(); i++) {
@@ -236,8 +255,12 @@ public class Laivanupotus {
         return 0;
     }
 
+    /**
+     * Lisää tekstikenttään uuden ilmoituksen
+     *
+     * @param t lisättävä merkkijono
+     */
     public void ilmoitus(String t) {
-
         t2 = t3;
         t3 = t4;
         t4 = t5;

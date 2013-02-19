@@ -1,9 +1,10 @@
 
-package laivanupotus;
+package laivanupotus.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
+import laivanupotus.peli.Laivanupotus;
 
 public class NappiKuuntelija implements ActionListener{
     private Laivanupotus l;
@@ -23,8 +24,7 @@ public class NappiKuuntelija implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if(nappi==1){
         l.toteutaVuorot(this.x.getText(),this.y.getText());
-        //this.x.setText("");
-        //this.y.setText("");
+        l.getPaivitettava().paivita();
         }else if(nappi==2){
             System.exit(0); 
         }

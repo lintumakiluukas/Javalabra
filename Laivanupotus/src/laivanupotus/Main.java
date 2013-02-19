@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package laivanupotus;
+import laivanupotus.gui.Kayttoliittyma;
 import javax.swing.SwingUtilities;
 
 public class Main {

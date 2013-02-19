@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 
+import laivanupotus.domain.Laiva;
+import laivanupotus.domain.Kentta;
 import laivanupotus.*;
 import org.junit.After;
 import org.junit.AfterClass;
