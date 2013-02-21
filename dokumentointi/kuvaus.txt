@@ -1,18 +1,15 @@
 Aihe: Laivanupotuspeli
 Tavanomainen laivanupotuspeli, jossa vastakkain ovat pelaaja ja tekoäly.
-Molemmilla puolilla on käytössään 10x10 kokoinen alue, johon pelaaja saa 
-asetella aluksensa. Tekoäly arpoo omien laivojensa sijainnit.
-Pelaajalla on käytössään 6 alusta. Yksi kappale seuraavan
-kokoisia aluksia: 5, 4, 2 ja 1 sekä kaksi kappaletta 3 ruudun kokoista alusta.
+Molemmilla puolilla on käytössään 10x10 kokoinen alue, johon arvotaan pelaajan
+ja vastustajan laivat.
+Pelaajalla on käytössään 5 alusta. Yksi kappale seuraavan
+kokoisia aluksia: 5, 4, 3, 2 ja 1.
 Pelaaja ampuu sokkona vastustajan puolelle, ja peli ilmoittaa, osuiko hän.
+Tietokone ampuu satunnaiseen koordinaattiin, ja mikäli osuu, ampuu viereisiin koordinaatteihin.
 Ensimmäisena vastustajan kaikki alukset tuhonnut pelaaja voittaa.
-Peli laskee voittoon tarvitut vuorot, ja tallentaa voittajan tuloksen tekstitiedostona
-tallennettavaan highscore-listaan.
 
 Käyttäjä: Pelaaja
 
 Käyttäjän toiminnot:
 - Pelin aloittaminen
-- Laivojen asettelu
 - Ampuminen
-- Pistelistan tarkastelu

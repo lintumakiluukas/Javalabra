@@ -1,0 +1,9 @@
+15.1. Ohjelmoinnin aloitus
+23.1. Ohjelmointi edistyy, luokkakaavio tehty
+30.1. Lisää koodia, testejä
+6.2. Käyttöliittymän ohjelmoinnin aloitus
+11.2. Ohjelmointia, ensimmäinen sekvenssikaavio
+12.2. Kaavioita päivitetty, graafinen puoli aloitettu
+18.2. vastustajan tekoäly valmis
+19.2. viimeistelyä, ulkoasu kunnossa
+21.2. viimeinen sekvenssikaavio ja testejä
